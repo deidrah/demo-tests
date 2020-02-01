@@ -30,12 +30,10 @@ class LostHatFrontPageTests(unittest.TestCase):
         actual_slider_width = slider_element.size['width']
         with self.subTest('Element height'):
             self.assertLess(expected_min_height, actual_slider_height,
-                            f'Element height found by xpath {slider_xpath} on page {driver.current_url} is smaller '
-                            f'than expected {expected_min_height}px')
+                            'Element height found by xpath {} on page {} is smaller than expected {}px'.format(slider_xpath, driver.current_url, expected_min_height))
         with self.subTest('Element width'):
             self.assertLess(expected_min_width, actual_slider_width,
-                            f'Element width found by xpath {slider_xpath} on page {driver.current_url} is smaller '
-                            f'than expected {expected_min_width}px')
+                            'Element width found by xpath {} on page {} is smaller than expected {}px'.format(slider_xpath, driver.current_url, expected_min_width))
 
     def test_slider_contain_exact_number_of_slides(self):
         expected_number_of_slides = 3
@@ -43,9 +41,9 @@ class LostHatFrontPageTests(unittest.TestCase):
         driver = self.driver
         driver.get(self.base_url)
         slider_elements = driver.find_elements_by_xpath(slides_xpath)
-        actual_numer_of_slides = len(slider_elements)
-        self.assertEqual(expected_number_of_slides, actual_numer_of_slides,
-                         f'Slides number differ for page {self.base_url}')
+        actual_number_of_slides = len(slider_elements)
+        self.assertEqual(expected_number_of_slides, actual_number_of_slides,
+                         'Slides number differ for page {}'.format(self.base_url))
 
     def test_slides_required_title_text(self):
         expected_text_included_in_slide = 'sample'
@@ -58,7 +56,7 @@ class LostHatFrontPageTests(unittest.TestCase):
             title_element_text_lower = title_element_text.lower()
             with self.subTest(title_element_text_lower):
                 self.assertIn(expected_text_included_in_slide, title_element_text_lower,
-                              f"Slides does not contain expected text for page {self.base_url}")
+                              "Slides does not contain expected text for page {}".format(self.base_url))
 
     def test_number_of_featured_products(self):
         expected_number_of_products = 8
@@ -66,6 +64,6 @@ class LostHatFrontPageTests(unittest.TestCase):
         driver = self.driver
         driver.get(self.base_url)
         product_elements = driver.find_elements_by_xpath(product_xpath)
-        actual_numer_of_products = len(product_elements)
-        self.assertEqual(expected_number_of_products, actual_numer_of_products,
-                         f'Products number differ for page {self.base_url}')
+        actual_number_of_products = len(product_elements)
+        self.assertEqual(expected_number_of_products, actual_number_of_products,
+                         'Products number differ for page {}'.format(self.base_url))

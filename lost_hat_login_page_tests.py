@@ -24,10 +24,10 @@ class LostHatLoginPageTests(unittest.TestCase):
 
     def test_correct_login(self):
         # expected_text is a user name and user surname used during registration
-        expected_text = 'changeme-username changeme-usersurname'
+        expected_text = 'Adam Testowy'
         user_name_xpath = '//a[@class="account"]/*[@class="hidden-sm-down"]'
-        user_email = 'changeme@test.test'
-        user_pass = 'changeme-pass'
+        user_email = 'adam@testowy.pl'
+        user_pass = 'test123'
         driver = self.driver
         driver.get(self.login_url)
         fh.user_login(driver, user_email, user_pass)
@@ -53,4 +53,4 @@ class LostHatLoginPageTests(unittest.TestCase):
         """
         element = driver.find_element_by_xpath(xpath)
         element_text = element.text
-        self.assertEqual(expected_text, element_text, f'Expected text differ from actual on page: {driver.current_url}')
+        self.assertEqual(expected_text, element_text, 'Expected text differ from actual on page: {}'.format(driver.current_url))

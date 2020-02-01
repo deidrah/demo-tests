@@ -44,4 +44,5 @@ class LostHatSmokeTests(unittest.TestCase):
     def assert_title(self, url, expected_title):
         actual_title = self.get_page_title(url)
         self.assertEqual(expected_title, actual_title,
-                         f'Expected {expected_title} differ from actual title {actual_title} on page: {url}')
+                         'Expected {} differ from actual title {} on page: {}'.format(expected_title, actual_title,
+                                                                                      url))

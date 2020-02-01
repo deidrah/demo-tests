@@ -37,4 +37,4 @@ class LostHatProductPageTests(unittest.TestCase):
         """
         element = driver.find_element_by_xpath(xpath)
         element_text = element.text
-        self.assertEqual(expected_text, element_text, f'Expected text differ from actual on page: {driver.current_url}')
+        self.assertEqual(expected_text, element_text, 'Expected text differ from actual on page: {}'.format(driver.current_url))
