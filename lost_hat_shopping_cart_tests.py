@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-
 from helpers import operational_helpers as oh
 
 
@@ -10,6 +9,7 @@ class LostHatShoppingCartTests(unittest.TestCase):
         self.subpage_art_url = 'https://autodemo.testoneo.com/en/9-art'
         self.driver = webdriver.Chrome(executable_path=r"C:\Users\Dominika\Downloads\chromedriver_win32("
                                                        r"1)\chromedriver.exe")
+        self.driver.implicitly_wait(10)
 
     @classmethod
     def tearDown(self):
@@ -26,7 +26,5 @@ class LostHatShoppingCartTests(unittest.TestCase):
         item_element.click()
         shopping_cart_button_element = driver.find_element_by_xpath(shopping_cart_button_xpath)
         shopping_cart_button_element.click()
-        # time.sleep(3)
-        oh.wait_for_elements(driver, confirmation_modal_title_xpath)
-        confirmation_modal_element = driver.find_element_by_xpath(confirmation_modal_title_xpath)
+        confirmation_modal_element = oh.visibility_of_element_wait(driver, confirmation_modal_title_xpath)
         self.assertEqual(expected_confirmation_modal_text, confirmation_modal_element.text)
