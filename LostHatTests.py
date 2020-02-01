@@ -1,5 +1,6 @@
 import unittest
 from selenium import webdriver
+from helpers import functional_helpers as fh
 
 
 class LostHatTests(unittest.TestCase):
@@ -16,18 +17,14 @@ class LostHatTests(unittest.TestCase):
     def tearDown(self):
         self.driver.quit()
 
-    def user_login(self, driver, user_email, user_pass):
-        # finding login input box and sending value
-        login_input_element = driver.find_element_by_xpath('//*[@type="email"]')
-        login_input_element.send_keys(user_email)
-        # finding password input box and sending value
-        login_input_element = driver.find_element_by_xpath('//*[@type="password"]')
-        login_input_element.send_keys(user_pass)
-        # finding button 'SIGN IN'
-        button_next_element = driver.find_element_by_xpath('//*[@id="submit-login"]')
-        button_next_element.click()
-
     def assert_element_text(self, driver, xpath, expected_text):
+        """Comparing expected text with observed value from web element
+
+           :param driver: webdriver instance
+           :param xpath: xpath to element with text to be observed
+           :param expected_text: text what we expecting to be found
+           :return: None
+        """
         element = driver.find_element_by_xpath(xpath)
         element_text = element.text
         self.assertEqual(expected_text, element_text, f'Expected text differ from actual on page: {driver.current_url}')
@@ -47,7 +44,7 @@ class LostHatTests(unittest.TestCase):
         user_pass = 'test123'
         driver = self.driver
         driver.get(self.login_url)
-        self.user_login(driver, user_email, user_pass)
+        fh.user_login(driver, user_email, user_pass)
         self.assert_element_text(driver, user_name_xpath, expected_text)
 
     def test_incorrect_login(self):
@@ -58,7 +55,7 @@ class LostHatTests(unittest.TestCase):
         user_pass = 'abc123'
         driver = self.driver
         driver.get(self.login_url)
-        self.user_login(driver, user_email, user_pass)
+        fh.user_login(driver, user_email, user_pass)
         self.assert_element_text(driver, alert_xpath, expected_text)
 
     def test_check_product_name(self):
