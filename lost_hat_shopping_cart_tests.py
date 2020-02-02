@@ -1,25 +1,10 @@
-import unittest
-from selenium import webdriver
+from BaseTestClass import BaseTestClass
 from helpers import operational_helpers as oh
 
-from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
 from helpers.wrappers import screenshot_decorator
 
 
-class LostHatShoppingCartTests(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.subpage_art_url = 'https://autodemo.testoneo.com/en/9-art'
-        driver = webdriver.Chrome(executable_path=r"C:\Users\Dominika\Downloads\chromedriver_win32("
-                                                  r"1)\chromedriver.exe")
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
-        driver.implicitly_wait(10)
-
-
-    @classmethod
-    def tearDown(self):
-        self.ef_driver.quit()
+class LostHatShoppingCartTests(BaseTestClass):
 
     @screenshot_decorator
     def test_adding_item_to_shopping_cart(self):

@@ -1,14 +1,14 @@
-import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 from selenium.webdriver.support.events import EventFiringWebDriver
+
+from BaseTestClass import BaseTestClass
 from helpers.screenshot_listener import ScreenshotListener
 from helpers.wrappers import screenshot_decorator
-from helpers.wrappers import screenshot_decorator
 
 
-class LostHatSmokeTests(unittest.TestCase):
+class LostHatSmokeTests(BaseTestClass):
     @classmethod
     def setUpClass(self):
         self.base_url = 'https://autodemo.testoneo.com/en/'

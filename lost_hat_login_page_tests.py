@@ -1,24 +1,9 @@
-import unittest
-from selenium import webdriver
+from BaseTestClass import BaseTestClass
 from helpers import functional_helpers as fh
-
-from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
 from helpers.wrappers import screenshot_decorator
 
 
-class LostHatLoginPageTests(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.base_url = 'http://autodemo.testoneo.com/en/'
-        self.login_url = self.base_url + 'login'
-        driver = webdriver.Chrome(executable_path=r"C:\Users\Dominika\Downloads\chromedriver_win32("
-                                                  r"1)\chromedriver.exe")
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
-
-    @classmethod
-    def tearDown(self):
-        self.ef_driver.quit()
+class LostHatLoginPageTests(BaseTestClass):
 
     @screenshot_decorator
     def test_login_text_header(self):

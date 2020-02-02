@@ -1,23 +1,9 @@
-import unittest
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
-from selenium.webdriver.support.events import EventFiringWebDriver
-from helpers.screenshot_listener import ScreenshotListener
+from BaseTestClass import BaseTestClass
 from helpers.wrappers import screenshot_decorator
 
 
-class LostHatSearchTests(unittest.TestCase):
-    @classmethod
-    def setUp(self):
-        self.base_url = 'http://autodemo.testoneo.com/en/'
-        driver = webdriver.Chrome(executable_path=r"C:\Users\Dominika\Downloads\chromedriver_win32("
-                                                  r"1)\chromedriver.exe")
-        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
-
-    @classmethod
-    def tearDown(self):
-        self.ef_driver.quit()
+class LostHatSearchTests(BaseTestClass):
 
     @screenshot_decorator
     def test_sanity_search_on_main_page(self):
