@@ -2,28 +2,34 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+from selenium.webdriver.support.events import EventFiringWebDriver
+from helpers.screenshot_listener import ScreenshotListener
+from helpers.wrappers import screenshot_decorator
+
 
 class LostHatSearchTests(unittest.TestCase):
     @classmethod
     def setUp(self):
         self.base_url = 'http://autodemo.testoneo.com/en/'
-        self.driver = webdriver.Chrome(executable_path=r"C:\Users\Dominika\Downloads\chromedriver_win32("
-                                                       r"1)\chromedriver.exe")
+        driver = webdriver.Chrome(executable_path=r"C:\Users\Dominika\Downloads\chromedriver_win32("
+                                                  r"1)\chromedriver.exe")
+        self.ef_driver = EventFiringWebDriver(driver, ScreenshotListener())
 
     @classmethod
     def tearDown(self):
-        self.driver.quit()
+        self.ef_driver.quit()
 
+    @screenshot_decorator
     def test_sanity_search_on_main_page(self):
         search_phase = 'Hummingbird'
         expected_element_name = 'Hummingbird Printed T-shirt'
         search_input_xpath = '//*[@name="s"]'
         result_element_xpath = '//*[@class="product-miniature js-product-miniature"]'
-        self.driver.get(self.base_url)
-        search_input_element = self.driver.find_element_by_xpath(search_input_xpath)
+        self.ef_driver.get(self.base_url)
+        search_input_element = self.ef_driver.find_element_by_xpath(search_input_xpath)
         search_input_element.send_keys(search_phase)
         search_input_element.send_keys(Keys.ENTER)
-        result_elements = self.driver.find_elements_by_xpath(result_element_xpath)
+        result_elements = self.ef_driver.find_elements_by_xpath(result_element_xpath)
         found_elements_number = 0
         for element in result_elements:
             if expected_element_name in element.text:
